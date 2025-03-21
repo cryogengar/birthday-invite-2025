@@ -297,4 +297,305 @@
 </script>
 
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>gengar's invite test</title>
+  <style>
+    body {
+      font-family: Times New Roman, sans-serif;
+      background-color: black;
+      /*background: url(https://i.pinimg.com/originals/e7/16/55/e7165502b2a1cf61fa81b20e02bad088.gif);*/
+      /*background-size: cover;*/
+      color: #ff66cc;
+      text-align: center;
+      margin-top: 100px;
+      position: relative;
+      overflow: hidden;
+      animation: glitchyBg 1.5s infinite alternate;
+    }
+    
+    #glitchOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: url("https://i.pinimg.com/originals/f1/59/53/f15953b0becec1c09a006cd38a50bc98.gif"); 
+      opacity: 0.1;
+      mix-blend-mode: difference;
+      animation: glitchFlicker 0.7s infinite alternate;
+    }
+
+    @keyframes glitchFlicker {
+      0% { opacity: 0.1; }
+      100% { opacity: 0.3; }
+    }
+    
+    
+    #gengarCursor {
+        position: absolute;
+        width: 50px;
+        pointer-events: none;
+        z-index: 1000;
+        transition: transform 0.1s linear;
+    }
+
+    .hidden { display: none; }
+    
+    button { 
+        margin: 10px; padding: 5px 20px; 
+        background-color: #2e2e2e;
+        border: 2px solid #ff66cc;
+        color: #ff66cc;
+        font-family: 'UnifrakturCook', cursive;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        
+    }
+        
+    button:hover {
+        transform: scale(1.1);
+    }
+        
+    .choice-button {
+        position: relative;
+        background-color: #000;
+        border: 2px solid transparent;
+        border-image: linear-gradient(45deg, #ff66cc, #ffffff) 1;
+        color: white;
+        font-family: 'UnifrakturCook', cursive;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 1;
+      
+        /* pink white animated border */
+
+        background-image: linear-gradient(black, black)
+            linear-gradient(45deg, #ff66cc, #ffffff, #ff66cc);
+        background-origin: border-box;
+        background-clip: padding-box, border-box;
+        background-size: 200% 200%;
+        animation: pinkWhiteBorder 4s linear infinite;
+        transition: transform 0.2s ease-in-out;
+        }
+    
+    @keyframes pinkWhiteBorder {
+        0% { background-position: 0% 50%, 0% 50%; }
+        50% { background-position: 100% 50%, 100% 50%; }
+        100% { background-position: 0% 50%, 0% 50%; }
+    }
+    
+    .choice-button:hover {
+      transform: scale(1.1);
+      box-shadow: 
+        0 0 10px rgba(255, 102, 204, 0.8), 
+        0 0 20px rgba(204, 102, 255, 0.6);
+    }
+    
+    .rainbow-button {
+      position: relative;
+      background-color: black;
+      border: 3px solid transparent;
+      color: white;
+      padding: 10px 20px;
+      font-family: 'Comic Sans MS', cursive;
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 1;
+    
+      /* rainbow button animated border */
+      background-image: linear-gradient(black, black),
+        linear-gradient(270deg, #ff66cc, #ffcc00, #66ffcc, #6699ff, #cc66ff);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      background-size: 200% 200%;
+      animation: rainbowBorder 1s linear infinite;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+
+    @keyframes rainbowBorder {
+      0% { background-position: 0% 50%, 0% 50%; }
+      50% { background-position: 100% 50%, 100% 50%; }
+      100% { background-position: 0% 50%, 0% 50%; }
+    }
+    
+    .rainbow-button:hover {
+        transform: scale(1.1);
+        box-shadow: 
+        0 0 10px rgba(255, 102, 204, 0.8), 
+        0 0 20px rgba(204, 102, 255, 0.6);
+    }
+    
+  </style>
+</head>
+<body>
+    
+    <img src="https://i.pinimg.com/originals/66/36/d3/6636d37ba22a391c6353b1436a81f656.gif" id="gengarCursor">
+    <div id="glitchOverlay"></div>
+    <audio id="clickSound" src="https://www.myinstants.com/media/sounds/meow-3.mp3" preload="auto"></audio>
+    
+    <div id="startScreen">
+
+      <h1>⤹˚˖ ♫ ୭  ♡.ᐟ click here! ⋆ ᓚ₍⑅^..^₎♡ .ᐟ.ᐟ</h1>
+      <button class="rainbow-button" onclick="start()">start</button>
+      
+      </div>
+
+  <div id="question" class="hidden">
+      <p>are you free march 28 evening?</p>
+      <button class="choice-button" onclick="answerNo()">no 💔</button>
+      <button class="choice-button" onclick="answerYes()">yes 🤍</button>
+      </div>
+  
+  <div id="rsvp" class="hidden">
+      <p>yay! rsvp to gengar's birthday dinner + karaoke!</p>
+      <form id="rsvpForm" action="https://formspree.io/f/moveedng" method="POST">
+          <input type="text" name="name" placeholder="enter your email" required><br><br>
+          <button class="choice-button" type="submit">submit</button>
+      </form>
+      
+      <div id="formMessage" class="hidden"></div>
+  
+  </div>
+  
+  <div id="sad" class="hidden">
+      
+      <p>⠀
+    
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣤⣤⣀⣀⠀⠀⠀⢀⣀⣤⠴⠶⠶⢶⣤⣄⡀⠀⠀⢀⣀⣤⠴⠶⠒⠶⢤⣤⣀⠀⠀⠀⠀⢣⣀⣀⣀⡀⠀⠀⣀⠠⠄⠒⠤⠀⠀⠀⠀⠀
+⠀⠀⠠⠀⠀⠂⠀⠀⠂⠀⠁⢠⡿⠋⠀⠀⠀⠈⣉⡙⠛⠛⠋⠁⣤⠶⣶⠀⠀⠀⠉⠙⠛⠋⠉⠁⠀⠀⢀⣶⠶⢶⣄⠉⠛⠛⠛⠛⠛⠉⠉⠉⠉⠛⢿⣇⠀⠀⠀⡰⠀⠀⠀⠀⠀
+⠀⠀⠄⠀⠂⠠⠀⠁⢀⠈⠀⢻⡆⠀⠀⠀⠀⣾⣷⠟⠀⠀⠀⠀⣠⡶⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⠛⣦⠀⠉⠀⠀⠀⠀⠀⠀⢲⣶⡄⠀⠀⠀⣿⠆⢠⠘⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⡀⠄⠀⠀⠐⠀⠀⠐⠘⣧⠀⢰⠆⠀⠈⠁⠀⠀⠀⣠⣶⠿⠥⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣘⣷⣀⠀⠀⠀⠀⠀⠀⠀⠙⠉⠀⠀⣸⡟⠀⢆⠁⠀⠀⠀⢈⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠀⠀⠈⠀⠀⠘⣧⠀⠀⠀⠀⣤⣴⣶⣿⣿⣦⣤⠀⠀⠉⢳⣤⠀⠀⠀⠀⠀⠀⠀⣤⡖⠋⠁⠀⢹⣷⣦⣤⡄⠀⠀⠀⠀⠀⠀⢸⡟⠀⠀⢪⡄⠀⠈⠀⢠⡆⠀
+⠀⠀⠀⠀⡀⠄⠀⠀⠈⠀⠀⠀⠐⢛⡿⠟⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⠀⠈⢦⡀⠀⠀⠀⣰⠞⠉⣀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⠷⠾⢷⡟⠻⡇⠀⠀⠈⢱⢢⣐⡠⢏⠄⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⠀⣰⠏⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⠿⣭⣻⣿⣷⡄⠀⢻⡄⠀⡾⠃⣠⣾⣿⣿⣿⣿⣿⣿⣿⣼⣟⢿⣿⣷⡀⠀⠱⣼⠃⠀⢈⠀⠀⠀⠃⠈⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀⣼⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⣿⣯⣿⣿⡄⠀⢳⣼⠁⣰⣿⣿⣻⣿⣿⣿⣿⣿⠏⠀⠉⢻⣯⣿⣿⡄⠀⠹⣆⠈⠀⢀⠈⠀⠠⠀⠂⠈⠀
+⠀⠀⠀⠀⡀⠀⠠⠀⠂⠈⠀⣼⠁⢰⣿⣿⢹⣿⣿⣿⣿⣿⣿⣷⣤⣴⣿⣿⢿⣿⣧⠀⢸⡏⢀⣿⣿⣦⣿⣿⣿⣿⣿⣿⣧⣀⣠⣾⣿⣏⣻⣿⠀⠀⣿⠀⠠⠀⢀⠈⠀⠄⠐⠀⡀
+⠀⠀⠐⠀⠀⠠⠀⠀⠄⠐⠀⣿⠀⢸⣿⠋⣹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⣼⡇⠸⣿⣟⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⠀⠀⣿⠁⠀⡀⠂⠀⠄⠀⠂⢀⠀
+⠀⠀⠂⢀⠈⠀⡀⠂⠀⠄⠂⢻⡄⠈⢿⣿⡉⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⣾⣿⠁⢀⣿⡆⠀⢿⣿⡴⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢷⣿⡏⠀⢰⡟⠀⢀⠀⠐⠀⠠⠈⢀⠀⡀
+⠀⠀⡁⠀⡀⠂⠀⠐⠀⠠⠀⠸⣷⡀⠊⢿⣿⡟⠙⠿⣿⣿⣿⣿⡿⠻⣧⣽⡿⠃⢀⣾⠛⣿⡀⠈⢿⣷⣨⡿⢿⣿⣿⣿⣿⣿⣿⡏⢰⣿⡟⠀⢀⣿⠀⢀⠀⠠⠈⢀⠐⠀⠠⠀⠀
+⠀⠐⠀⡀⠄⠀⡁⠠⠈⢀⠐⠀⠙⢷⣄⠁⠛⠿⣷⣤⣿⣤⣌⣧⣶⣶⡿⠋⢀⣴⠟⣿⠀⢸⢳⣄⠀⠹⢿⣷⣤⣸⣏⣍⣉⣹⣦⣿⡾⠋⠀⣠⣿⠁⢀⠀⠠⠐⠀⠠⠀⡈⠀⠄⠁
+⠀⢂⠀⠄⢀⠂⢀⠐⠀⠂⠠⠈⠀⠷⣿⠳⢦⣄⡀⠉⠉⠉⠉⠉⠉⢀⣠⡴⠟⠡⠌⣿⠀⢸⠀⠙⢷⣤⣀⠈⠛⠛⠛⠟⠛⠛⠋⠁⣀⣤⠾⢋⣿⠀⠂⡐⠠⢈⠐⠁⠂⠄⠒⠀⡀
+⠁⠀⡀⠆⠀⡀⠆⠈⡀⠈⡀⠈⠀⡈⣿⡆⠀⠈⠹⠿⠿⠿⠿⠿⣿⠿⡿⠇⠀⠀⢀⣿⠀⢸⠀⠀⠰⡈⠹⢿⠿⣶⣶⣆⣶⣶⣾⡿⠏⠁⠀⣸⡇⠀⡀⢀⠁⠆⡈⠀⠁⠈⠰⢀⠀
+⠊⡀⠐⡀⠐⡀⠰⢀⠐⡀⠄⡁⠂⢰⣿⠁⠉⠂⠀⠀⠀⠀⠀⠀⠉⠁⠀⠀⠀⠀⣌⣿⠀⢸⠀⠀⠀⠈⠑⠀⠀⠀⠈⣁⣨⠤⠀⠀⠀⠀⢰⣿⠁⠐⠠⢈⠐⠠⠂⠁⠀⡐⠀⠠⠌
+⡐⣀⠡⠀⢄⡁⢂⠄⢂⠐⡀⡐⢀⣸⣿⠀⠀⠀⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⠀⢸⣧⡀⠀⠀⠀⠀⠀⠀⣼⢻⢷⡀⠀⠀⠀⠀⠘⣿⠀⠡⠂⠌⠘⠀⠄⠂⢁⡀⠐⠠⠀
+⡔⣠⢣⠑⣢⠱⡌⡜⣄⠣⡔⣌⠢⣸⣷⠀⠀⠈⠙⠃⠀⠀⠀⠀⠀⠀⠀⣴⠏⡱⢛⡏⠀⢸⠉⠻⣦⠀⠀⠀⠀⣼⠃⠜⡈⢿⡄⢠⣶⠀⣸⣿⠀⡑⡈⠄⠡⢈⠀⠌⠤⢠⠉⠔⡀
+⠦⡡⢦⠙⡤⢓⡜⡰⢌⡱⢒⢌⠣⣜⢻⣧⠀⠀⢀⣠⣀⡀⠀⠀⠀⠀⣼⠃⠀⠀⢨⡇⠀⢸⡀⠀⠙⣇⠀⠀⢸⡇⠀⢰⡇⠈⡇⠘⠏⣰⣿⡅⢦⠱⠌⡄⠠⠠⠌⡌⢢⠁⡌⡐⠠
+⢣⡑⢎⡱⢌⠣⡜⡱⢊⡴⣉⢎⡱⢌⡿⢻⡇⠀⠸⢿⣿⡿⠂⠀⢠⡞⠋⣰⠀⠀⣼⡇⠀⢸⡇⠀⣆⠉⡿⠀⢸⣄⠐⠬⣿⣾⠇⠀⠀⣿⠙⣿⡂⢏⠒⣠⠣⡑⢎⠴⡡⠃⡔⡁⠐
+⢣⠜⣢⠑⣎⡱⢬⣑⢣⡒⢥⠚⡔⣿⠁⠈⢷⣄⣤⣤⣤⣤⣀⣀⣀⣹⣾⣥⣤⣄⣿⡇⠀⢸⣇⡀⢉⣛⣁⣤⣄⣬⡝⠚⢉⣀⡀⠀⢀⡟⠀⣿⡇⢆⡚⣤⢣⡙⣌⠲⣱⡿⠠⠄⡁
+⣣⢚⢤⠫⣔⢣⠳⣌⢧⡙⡎⠵⣈⣿⣤⣤⣼⡇⠀⠀⠀⠀⠈⠉⠙⠓⠤⣄⠀⡹⢻⠆⠀⢸⡏⢯⡙⢉⡥⠞⠉⠉⠙⠛⠛⠉⠙⢿⣿⣥⣄⣼⣃⢎⡶⣘⢦⡱⢌⡣⢽⣿⣑⠢⣘
+⢶⣉⠮⣱⢊⡵⢫⣜⢲⡹⣘⡱⣜⡲⣯⣿⠉⣷⣶⣶⣶⣶⣶⣶⣴⣤⣤⣬⣭⣥⣾⠀⠀⠘⣧⣀⣿⣁⣤⣀⣠⣀⣀⣀⣀⣀⣀⣸⠋⣿⢭⣱⢎⡿⣴⢫⠖⣭⠒⣿⣿⡞⣧⡑⢮
+⢳⢬⠳⠥⡚⡜⢣⢎⢧⢓⡬⣳⢧⣻⣽⣿⠀⣿⣿⣿⣿⣿⣿⡿⣽⣿⣿⣿⣿⣿⣿⠀⠀⢠⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⡿⣿⢠⡿⣳⢮⣟⡼⣣⢏⡻⢤⠙⣼⣧⣟⠿⣸⣹
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠃⠛⠛⠛⢻⠀⣿⣧⢻⡼⣣⣜⡻⣇⠿⣼⢻⡟⣿⣿⣤⣀⣼⣿⢻⣟⡻⣼⡻⣼⢻⡟⣿⢻⣟⡻⣿⢸⣿⢣⡿⣜⣧⣛⣇⠻⣄⢻⣸⣧⢟⣧⢣⣟
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠃⢻⡿⠷⢿⣷⣾⣷⣿⣿⣷⣿⡾⠿⠿⠿⠿⠿⡾⡷⠾⣷⣷⣿⣷⣿⣾⣽⣷⣾⣷⣿⢸⡇⠀⠁⠈⠀⠁⠈⠁⠈⠀⠙⠋⠛⠀⠛⠚
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⠇⡄⠸⡇⠀⢿⣿⣿⣽⣫⣟⣽⣻⣷⡀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣯⣻⣝⣯⣿⠀⠀⣸⠁⠈⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⣧⢻⣬⡇⠀⠀⠀⠈⣿⠉⢹⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣽⠉⡿⠉⠉⠀⠀⣿⣀⡆⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣯⣿⠁⠀⠀⠀⠀⣹⣈⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣋⡇⠀⠀⠀⠀⢙⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+
+        <p>ok see you around...</p>
+    </div>
+    
+    <div id="backButton" class="hidden">
+        <button class="rainbow-button" onclick="startScreen()">back to start ꔫ</button>
+    </div>
+
+<script>
+    
+    document.addEventListener("mousemove", function(event) {
+        let gengar = document.getElementById("gengarCursor");
+        let x = event.clientX - 400;
+        let y = event.clientY - 100;
+        gengar.style.transform = `translate(${x}px, ${y}px)`;
+        
+    });
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const clickSound = document.getElementById("clickSound");
+        clickSound.volume = 0.3; // scale from 0 to 1
+
+    document.querySelectorAll("button").forEach(button => {
+        button.addEventListener("click", function () {
+            clickSound.currentTime = 0; // rewind to start
+            clickSound.play();
+            
+        });
+    });
+});
+
+    function start() {
+        document.getElementById("startScreen").classList.add("hidden");
+        document.getElementById("question").classList.remove("hidden");
+        
+    }
+
+    function answerYes() {
+        document.getElementById("question").classList.add("hidden");
+        document.getElementById("rsvp").classList.remove("hidden");
+        document.getElementById("rsvpForm").classList.remove("hidden");
+        document.getElementById("formMessage").classList.add("hidden");
+        document.getElementById("formMessage").innerHTML = "";
+        
+    }
+
+    function answerNo() {
+        document.getElementById("question").classList.add("hidden");
+        document.getElementById("sad").classList.remove("hidden");
+        document.getElementById("backButton").classList.remove("hidden");
+        
+    }
+
+    function startScreen() {
+        document.getElementById("startScreen").classList.remove("hidden");
+        document.getElementById("question").classList.add("hidden");
+        document.getElementById("rsvp").classList.add("hidden");
+        document.getElementById("sad").classList.add("hidden");
+        document.getElementById("backButton").classList.add("hidden");
+
+        const form = document.getElementById("rsvpForm");
+        const formMessage = document.getElementById("formMessage");
+    
+        form.reset();
+        form.classList.remove("hidden");
+        formMessage.innerHTML = "";
+        formMessage.classList.add("hidden");
+      }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("rsvpForm");
+        const formMessage = document.getElementById("formMessage");
+        const backButton = document.getElementById("backButton");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json'
+            }
+          }).then(() => {
+            form.classList.add("hidden");
+            formMessage.innerHTML = `<p>thank you for rsvp-ing, gengar appreciates u! ₍^. .^₎⟆</p>`;
+            formMessage.classList.remove("hidden");
+            backButton.classList.remove("hidden");
+          }).catch(() => {
+            formMessage.innerHTML = `<p>something went wrong... try again later☆</p>`;
+            formMessage.classList.remove("hidden");
+            backButton.classList.remove("hidden");
+      });
+    });
+  });
+  
+</script>
+
+</body>
+>>>>>>> 5d8fcf8718e4c9a80f719df44aaf6b318caf2db3
 </html>
